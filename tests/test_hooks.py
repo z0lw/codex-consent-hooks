@@ -91,6 +91,19 @@ class ConsentStopTests(TempHome):
         self.assertFalse(common.take_budget("s", "t", 3))
         self.assertTrue(common.take_budget("s", "other-turn", 3))
 
+    def test_queue_fallback_keeps_the_threads_own_settings(self):
+        path = pathlib.Path(self.temp.name) / "rollout.jsonl"
+        context = {"cwd": self.temp.name, "approval_policy": "on-request", "model": "m", "effort": "high",
+                   "sandbox_policy": {"type": "workspace-write", "writable_roots": ["/w"], "network_access": False}}
+        rollout(path, [{"type": "turn_context", "payload": context}])
+        command = consent_stop_hook.resume_command("codex", "sid", path)
+        self.assertEqual(command[:6], ["codex", "exec", "-C", self.temp.name, "-s", "workspace-write"])
+        self.assertIn('sandbox_workspace_write.writable_roots=["/w"]', command)
+        self.assertIn('approval_policy="on-request"', command)
+        self.assertEqual(command[-4:], ["resume", "--skip-git-repo-check", "sid", "-"])
+        rollout(path, [{"type": "turn_context", "payload": dict(context, sandbox_policy={"type": "custom"})}])
+        self.assertIsNone(consent_stop_hook.resume_command("codex", "sid", path))
+
 
 class TranscriptTests(TempHome):
     def test_injected_context_and_relays_are_not_user_words(self):
