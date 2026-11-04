@@ -55,6 +55,9 @@ DEFAULT_CONFIG: Dict[str, Any] = {
         "skip_consent_stops": True,
         "resume_on_indeterminate": True,
     },
+    "language_check": {"enabled": True, "rules": [], "extra_instruction": ""},
+    "schedule_check": {"enabled": True, "timezone": None},
+    "autocommit": {"enabled": True, "repos": []},
 }
 
 

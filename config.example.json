@@ -16,5 +16,56 @@
     "enabled": true,
     "skip_consent_stops": true,
     "resume_on_indeterminate": true
+  },
+  "language_check": {
+    "enabled": true,
+    "rules": [
+      {
+        "pattern": "申し訳ありません|すみません|すいません|ごめんなさい|申し訳ないです",
+        "label": "使わないと決めた謝罪句"
+      },
+      {
+        "pattern": "(?:おっしゃる|仰る|ご指摘の)(?:通り|とおり)|その(?:通り|とおり)(?:です|でした|だ|。)",
+        "label": "使わないと決めた表現"
+      },
+      {
+        "pattern": "べきでした|べきだった|必要がありました|つもりでした|つもりだった|つもりでいました",
+        "label": "行動の代わりに置いた当為・未実施の意図の表現",
+        "skip_quoted": true,
+        "contextual": true
+      },
+      {
+        "pattern": "(?:こと|の|点|件)を[、,]?\\s*(?:深く|重ねて|心より)?\\s*申し訳(?:ございません|ありません)",
+        "label": "「〜を、申し訳ございません」という文法の誤り（申し訳ございませんは「〜を」を受けない）"
+      }
+    ],
+    "extra_instruction": "謝罪は「申し訳ございません」の一文で足ります。経緯の説明は不要です。"
+  },
+  "schedule_check": {
+    "enabled": true,
+    "timezone": "Asia/Tokyo"
+  },
+  "sidebar": {
+    "enabled": true,
+    "section_ids": {
+      "ongoing": "",
+      "waiting": ""
+    },
+    "numbers": {
+      "1": "進行中",
+      "2": "待ち",
+      "3": "棚上げ",
+      "4": "完了",
+      "5": "外す"
+    },
+    "ongoing_name": "進行中",
+    "resumable_names": [
+      "棚上げ",
+      "完了"
+    ]
+  },
+  "autocommit": {
+    "enabled": true,
+    "repos": []
   }
 }

@@ -221,7 +221,7 @@ class InstallTests(unittest.TestCase):
             data = json.loads(pathlib.Path(home, "hooks.json").read_text())
             stop_commands = [h["command"] for e in data["hooks"]["Stop"] for h in e["hooks"]]
             self.assertEqual(stop_commands[0], "other")
-            self.assertEqual(len(stop_commands), 3)
+            self.assertEqual(len(stop_commands), 6)
             self.assertEqual(len(data["hooks"]["PreToolUse"]), 1)
             self.assertTrue(pathlib.Path(home, "consent-hooks.json").exists())
             subprocess.run([sys.executable, str(REPO / "install.py"), "--codex-home", home, "--uninstall"],
