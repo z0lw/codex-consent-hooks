@@ -1,0 +1,39 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /path/to/codex-consent-hooks/consent_hooks/consent_stop_hook.py",
+            "timeout": 90,
+            "statusMessage": "確認待ちの停止に常設の同意を返すか判定"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /path/to/codex-consent-hooks/consent_hooks/completion_guard.py",
+            "timeout": 120,
+            "statusMessage": "依頼が完了したかを確認"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "request_user_input.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /path/to/codex-consent-hooks/consent_hooks/consent_question_hook.py",
+            "timeout": 60,
+            "statusMessage": "許可済みの確認かを判定"
+          }
+        ]
+      }
+    ]
+  }
+}
