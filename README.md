@@ -6,7 +6,11 @@ English summary: Codex lifecycle hooks (Japanese-oriented) that answer routine c
 
 ## Codex に導入を頼む場合
 
-このリポジトリの URL を Codex に渡して「このフックを導入して」と頼めば、下の「導入手順（Codex 向け）」に沿って導入できます。
+下の文をコピーして Codex に貼り付けてください。下の「導入手順（Codex 向け）」に沿って導入できます。
+
+```text
+https://github.com/z0lw/codex-consent-hooks のフックを、READMEの導入手順に沿って導入してください。
+```
 
 ## フックと目的
 
